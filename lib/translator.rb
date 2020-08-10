@@ -1,4 +1,6 @@
 # require modules here
+def load_library(emoticons)
+  # first - visualize data within file
 require "yaml"
 require 'pry'
   # data is a hash of key/value pairs where the values are an array of strings
@@ -21,8 +23,7 @@ require 'pry'
  emo_file_with_country
 end
 
-def load_library(emoticons)
-  # first - visualize data withi
+
 
 def get_japanese_emoticon
   # code goes here
