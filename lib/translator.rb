@@ -1,34 +1,50 @@
-# require modules here
+
 def load_library(emoticons)
-  # first - visualize data within file
 require "yaml"
 require 'pry'
-  # data is a hash of key/value pairs where the values are an array of strings
-  # need to split array into new nested hash of key/value pairs
-  # emo_file[glasses][0] => english => "element"
-  # emo_file[glasses][1] => japanese => "element"
-  emot_file_with_country = {}  
-  
- emot_file = YAML.load_file(emoticons)
+
+emot_file = YAML.load_file(emoticons)
+emot_file_with_country = {}  
+ 
  emot_file.each do |key, value|
-    if value == [key][0]
-     english = [key][:english => value]
-   end
-    if value == [key][1]
-     japanese = [key][:japanese => value] 
-    end 
-    emo_file_with_country = {key => {english, japanese}
-    
+   emot_file_with_country[key] = {}
+   
+   emot_file_with_country[key][:english] = value[0]
+   emot_file_with_country[key][:japanese] = value[1]
   end  
- emo_file_with_country
+ emot_file_with_country
+end
+
+def get_english_meaning(emoticons, japanese_emoticon)
+  emot_hash = load_library(emoticons)
+  
+  found_emoticon = emot_hash.keys.find do |key, value|
+    
+    emot_hash[key][:japanese] == japanese_emoticon
+  end 
+  
+  if found_emoticon 
+    found_emoticon
+  else
+    "Sorry, that emoticon was not found"
+  end  
+end
+
+
+def get_japanese_emoticon(emoticons, english_emoticon)
+  emot_hash = load_library(emoticons)
+  
+    emot_hash.each do |key, value|
+      if
+        emot_hash[key][:english] == english_emoticon
+        japanese_emot = emot_hash[key][:japanese]
+      return japanese_emot
+      #elsif
+      #emot_hash[key][:english] != english_emoticon
+      #return "Sorry, that emoticon was not found"
+      end
+    end  
 end
 
 
 
-def get_japanese_emoticon
-  # code goes here
-end
-
-def get_english_meaning
-  # code goes here
-end
