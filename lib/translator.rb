@@ -31,20 +31,37 @@ def get_english_meaning(emoticons, japanese_emoticon)
 end
 
 
-def get_japanese_emoticon(emoticons, english_emoticon)
-  emot_hash = load_library(emoticons)
+#def get_japanese_emoticon(emoticons, english_emoticon)
+  #emot_hash = load_library(emoticons)
   
-    emot_hash.each do |key, value|
-      if
-        emot_hash[key][:english] == english_emoticon
-        japanese_emot = emot_hash[key][:japanese]
-      return japanese_emot
+    #emot_hash.each do |key, value|
+      #if
+        #emot_hash[key][:english] == english_emoticon
+        #japanese_emot = emot_hash[key][:japanese]
+      #return japanese_emot
       #elsif
       #emot_hash[key][:english] != english_emoticon
       #return "Sorry, that emoticon was not found"
-      end
-    end  
-end
+      #end
+    #end  
+#end
 
+def get_japanese_emoticon(emoticons, english_emoticon)
+  emot_hash = load_library(emoticons)
+  japanese_emot = ""
+  found_emoticon = emot_hash.keys.find do |key, value|
+    
+        if
+        emot_hash[key][:english] == english_emoticon
+        japanese_emot = emot_hash[key][:japanese]
+        
+        end 
+  end
+  if found_emoticon 
+    japanese_emot
+  else
+    "Sorry, that emoticon was not found"
+  end  
+end
 
 
